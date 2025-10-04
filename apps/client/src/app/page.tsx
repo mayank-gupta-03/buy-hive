@@ -1,7 +1,23 @@
+import ProductList from "@/components/ProductList";
+import Image from "next/image";
 import React from "react";
 
-const Home = () => {
-  return <div className="">Home</div>;
+interface Props {
+  searchParams: Promise<{ category: string }>;
+}
+
+const Home = async ({ searchParams }: Props) => {
+  const category = (await searchParams).category;
+  console.log(await searchParams);
+  return (
+    <div>
+      <div className="relative aspect-[3/1] mb-16">
+        <Image src={"/featured.png"} alt="Featured product" fill />
+      </div>
+
+      <ProductList category={category} activePage="home" />
+    </div>
+  );
 };
 
 export default Home;
