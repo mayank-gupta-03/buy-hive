@@ -1,60 +1,8 @@
 "use client";
 
-import {
-  Briefcase,
-  Footprints,
-  Glasses,
-  Hand,
-  Shirt,
-  ShoppingBasket,
-  Venus,
-} from "lucide-react";
+import { CATEGORIES } from "@/mock/category.data";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-
-// Temporary
-const CATEGORIES = [
-  {
-    name: "All",
-    icon: <ShoppingBasket className="w-4 h-4" />,
-    slug: "all",
-  },
-  {
-    name: "T-shirts",
-    icon: <Shirt className="w-4 h-4" />,
-    slug: "t-shirts",
-  },
-  {
-    name: "Shoes",
-    icon: <Footprints className="w-4 h-4" />,
-    slug: "shoes",
-  },
-  {
-    name: "Accessories",
-    icon: <Glasses className="w-4 h-4" />,
-    slug: "accessories",
-  },
-  {
-    name: "Bags",
-    icon: <Briefcase className="w-4 h-4" />,
-    slug: "bags",
-  },
-  {
-    name: "Dresses",
-    icon: <Venus className="w-4 h-4" />,
-    slug: "dresses",
-  },
-  {
-    name: "Jackets",
-    icon: <Shirt className="w-4 h-4" />,
-    slug: "jackets",
-  },
-  {
-    name: "Gloves",
-    icon: <Hand className="w-4 h-4" />,
-    slug: "gloves",
-  },
-];
 
 const Categories = () => {
   const searchParams = useSearchParams();
@@ -63,7 +11,7 @@ const Categories = () => {
 
   const selectedCategory = searchParams.get("category");
 
-  const handleChange = (value: string | null) => {
+  const handleCategoryChange = (value: string | null) => {
     const params = new URLSearchParams(searchParams);
     params.set("category", value || "all");
     console.log(params.toString());
@@ -76,7 +24,7 @@ const Categories = () => {
         <div
           className={`flex items-center gap-2 justify-center cursor-pointer px-2 py-1 rounded-md ${category.slug === selectedCategory ? "bg-white" : "text-gray-500"}`}
           key={category.slug}
-          onClick={() => handleChange(category.slug)}
+          onClick={() => handleCategoryChange(category.slug)}
         >
           {category.icon}
           {category.name}

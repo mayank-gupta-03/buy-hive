@@ -8,7 +8,7 @@ const Filter = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleFilter = (value: string) => {
+  const handleFilterChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
     value ? params.set("sort", value) : params.delete("sort");
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
@@ -21,7 +21,7 @@ const Filter = () => {
         name="sort"
         id="sort"
         className="ring-1 ring-gray-200 shadow-md p-1 rounded-sm"
-        onChange={(e) => handleFilter(e.target.value)}
+        onChange={(e) => handleFilterChange(e.target.value)}
       >
         <option value="">Select an option</option>
         <option value="newest">Newest</option>
