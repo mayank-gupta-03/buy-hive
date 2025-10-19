@@ -14,3 +14,13 @@ export type CartItem = Product & {
 };
 
 export type CartList = CartItem[];
+
+export type CartStore = {
+  cart: CartList;
+};
+
+export type CartStoreActions = {
+  addToCart: (product: CartItem) => void;
+  removeFromCart: (product: CartItem) => void;
+  clearCart: () => void;
+};

@@ -1,10 +1,12 @@
 "use client";
 
+import useCartStore from "@/stores/cartStore";
 import { Product } from "@/types/product.type";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 interface Props {
   product: Product;
@@ -15,6 +17,7 @@ const ProductCard = ({ product }: Props) => {
     size: product.sizes[0],
     color: product.colors[0],
   });
+  const { addToCart } = useCartStore();
 
   const handleProductType = ({
     type,
@@ -27,6 +30,16 @@ const ProductCard = ({ product }: Props) => {
       ...prev,
       [type]: value,
     }));
+  };
+
+  const handleAddToCart = (product: Product) => {
+    addToCart({
+      ...product,
+      selectedSize: productTypes.size,
+      selectedColor: productTypes.color,
+      quantity: 1,
+    });
+    toast.success("Product added to cart");
   };
 
   return (
@@ -89,7 +102,10 @@ const ProductCard = ({ product }: Props) => {
         </div>
         <div className="flex items-center justify-between">
           <p className="font-medium">${product.price}</p>
-          <button className="ring-1 ring-gray-200 cursor-pointer rounded-md px-2 py-1 hover:bg-black hover:text-white text-sm transition-all duration-300 flex gap-2 items-center">
+          <button
+            className="ring-1 ring-gray-200 cursor-pointer rounded-md px-2 py-1 hover:bg-black hover:text-white text-sm transition-all duration-300 flex gap-2 items-center"
+            onClick={() => handleAddToCart(product)}
+          >
             <ShoppingCart className="h-4 w-4" />
             Add to Cart
           </button>

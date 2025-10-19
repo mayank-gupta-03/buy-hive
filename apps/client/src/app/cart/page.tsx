@@ -2,12 +2,14 @@
 
 import PaymentForm from "@/components/PaymentForm";
 import ShippingForm from "@/components/ShippingForm";
-import { CART_ITEMS, STEPS } from "@/mock/cart.data";
+import { STEPS } from "@/mock/cart.data";
 import { ArrowRight, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { ShippingForm as ShippingFormInputs } from "@/types/shippingForm.type";
+import useCartStore from "@/stores/cartStore";
+import { CartItem } from "@/types/cart.type";
 
 const Cart = () => {
   const searchParams = useSearchParams();
@@ -15,6 +17,7 @@ const Cart = () => {
   const [shippingForm, setShippingForm] = useState<ShippingFormInputs | null>(
     null
   );
+  const { cart, removeFromCart } = useCartStore();
 
   const activeStep = parseInt(searchParams.get("step") || "1");
 
@@ -26,13 +29,16 @@ const Cart = () => {
     setShippingForm(data);
   };
 
-  const subTotal = CART_ITEMS.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  ).toFixed(2);
+  const subTotal = cart
+    .reduce((acc, item) => acc + item.price * item.quantity, 0)
+    .toFixed(2);
 
   // need to change the logic
   const total = subTotal;
+
+  const handleRemoveFromCart = (product: CartItem) => {
+    removeFromCart(product);
+  };
 
   return (
     <div className="flex flex-col gap-8 items-center justify-center mt-12">
@@ -63,7 +69,7 @@ const Cart = () => {
         {/* STEPS */}
         <div className="w-full lg:w-7/12 shadow-lg border-1 border-gray-100 p-8 rounded-lg flex flex-col gap-8">
           {activeStep === 1 ? (
-            CART_ITEMS.map((item) => (
+            cart.map((item) => (
               // SINGLE CART ITEM
               <div key={item.id} className="flex items-center justify-between">
                 {/* IMAGE AND. DETAILS */}
@@ -95,7 +101,10 @@ const Cart = () => {
                   </div>
                 </div>
                 {/* DELETE BUTTON */}
-                <button className="w-8 h-8 rounded-full bg-red-100 text-red-400 flex items-center justify-center cursor-pointer hover:bg-red-200 transition-all duration-300">
+                <button
+                  className="w-8 h-8 rounded-full bg-red-100 text-red-400 flex items-center justify-center cursor-pointer hover:bg-red-200 transition-all duration-300"
+                  onClick={() => handleRemoveFromCart(item)}
+                >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
