@@ -5,14 +5,13 @@ import ShippingForm from "@/components/ShippingForm";
 import { CART_ITEMS, STEPS } from "@/mock/cart.data";
 import { ArrowRight, Trash2 } from "lucide-react";
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { ShippingForm as ShippingFormInputs } from "@/types/shippingForm.type";
 
 const Cart = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const pathname = usePathname();
   const [shippingForm, setShippingForm] = useState<ShippingFormInputs | null>(
     null
   );
@@ -20,12 +19,11 @@ const Cart = () => {
   const activeStep = parseInt(searchParams.get("step") || "1");
 
   const handleStepChange = (step: number) => {
-    router.push(`${pathname}?step=${step}`, { scroll: false });
+    router.push(`/cart?step=${step}`, { scroll: false });
   };
 
   const handleShippingSubmit = (data: ShippingFormInputs) => {
     setShippingForm(data);
-    handleStepChange(3);
   };
 
   const subTotal = CART_ITEMS.reduce(
