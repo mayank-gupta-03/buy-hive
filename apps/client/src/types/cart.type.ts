@@ -17,6 +17,7 @@ export type CartList = CartItem[];
 
 export type CartStore = {
   cart: CartList;
+  hasHydrated: boolean;
 };
 
 export type CartStoreActions = {

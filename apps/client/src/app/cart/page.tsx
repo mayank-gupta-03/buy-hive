@@ -71,7 +71,10 @@ const Cart = () => {
           {activeStep === 1 ? (
             cart.map((item) => (
               // SINGLE CART ITEM
-              <div key={item.id} className="flex items-center justify-between">
+              <div
+                key={`${item.id}-${item.selectedColor}-${item.selectedSize}`}
+                className="flex items-center justify-between"
+              >
                 {/* IMAGE AND. DETAILS */}
                 <div className="flex gap-8">
                   {/* IMAGE */}
