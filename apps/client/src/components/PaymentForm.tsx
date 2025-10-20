@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface Props {
-  handleFormChange: (data: PaymentFormInputs) => void;
+  handleFormChange?: (data: PaymentFormInputs) => void;
 }
 
 const PaymentForm = ({ handleFormChange }: Props) => {
@@ -23,7 +23,7 @@ const PaymentForm = ({ handleFormChange }: Props) => {
   const handleFormSubmit: SubmitHandler<PaymentFormInputs> = (
     data: PaymentFormInputs
   ) => {
-    handleFormChange(data);
+    handleFormChange?.(data);
     router.push("/cart?step=3", { scroll: false });
   };
 

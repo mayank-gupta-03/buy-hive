@@ -21,7 +21,13 @@ const useCartStore = create<CartStore & CartStoreActions>()(
             return { cart: updatedCart };
           }
           return {
-            cart: [...state.cart, product],
+            cart: [
+              ...state.cart,
+              {
+                ...product,
+                quantity: product.quantity || 1,
+              },
+            ],
           };
         }),
       removeFromCart: (product) =>

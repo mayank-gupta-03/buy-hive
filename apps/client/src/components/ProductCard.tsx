@@ -39,13 +39,13 @@ const ProductCard = ({ product }: Props) => {
       selectedColor: productTypes.color,
       quantity: 1,
     });
-    toast.success("Product added to cart");
+    toast.success("Product added to cart!");
   };
 
   return (
     <div className="shadow-lg rounded-lg overflow-hidden">
       {/* IMAGE */}
-      <Link href={`/products/${product.id}}`}>
+      <Link href={`/products/${product.id}`}>
         <div className="relative aspect-[2/3] hover:scale-105 transition-all duration-300">
           <Image
             src={product.images[productTypes.color]}
