@@ -48,7 +48,7 @@ const ProductCard = ({ product }: Props) => {
       <Link href={`/products/${product.id}`}>
         <div className="relative aspect-[2/3] hover:scale-105 transition-all duration-300">
           <Image
-            src={product.images[productTypes.color]}
+            src={product.images?.[productTypes.color] ?? ""}
             alt={product.name}
             fill
             className="object-cover"

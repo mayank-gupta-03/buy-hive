@@ -10,7 +10,8 @@ const Filter = () => {
 
   const handleFilterChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
-    value ? params.set("sort", value) : params.delete("sort");
+    if (value) params.set("sort", value);
+    else params.delete("sort");
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 

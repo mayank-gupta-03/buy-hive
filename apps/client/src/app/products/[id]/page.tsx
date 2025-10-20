@@ -20,8 +20,8 @@ export const generateMetadata = async ({
 
 const ProductPage = async ({ params, searchParams }: Props) => {
   const { color, size } = await searchParams;
-  const selectedSize = size || PRODUCT.sizes[0];
-  const selectedColor = color || PRODUCT.colors[0];
+  const selectedSize = size ?? PRODUCT.sizes[0];
+  const selectedColor = color ?? PRODUCT.colors[0];
   const productId = await params;
   console.log(productId);
 
@@ -30,7 +30,7 @@ const ProductPage = async ({ params, searchParams }: Props) => {
       {/* IMAGE */}
       <div className="w-full lg:w-5/12 relative aspect-[2/3]">
         <Image
-          src={PRODUCT.images[selectedColor]}
+          src={PRODUCT.images?.[selectedColor] || ""}
           alt={PRODUCT.name}
           fill
           className="object-contain rounded-md"
