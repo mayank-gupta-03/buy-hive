@@ -6,7 +6,7 @@ interface Props {
   searchParams: Promise<{ category: string }>;
 }
 
-const Home = async ({ searchParams }: Props) => {
+const HomePage = async ({ searchParams }: Props) => {
   const category = (await searchParams).category;
   console.log(await searchParams);
   return (
@@ -20,4 +20,4 @@ const Home = async ({ searchParams }: Props) => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -11,7 +11,7 @@ import { ShippingForm as ShippingFormInputs } from "@/types/shippingForm.type";
 import useCartStore from "@/stores/cartStore";
 import { CartItem } from "@/types/cart.type";
 
-const Cart = () => {
+const CartPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [shippingForm, setShippingForm] = useState<ShippingFormInputs | null>(
@@ -159,4 +159,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartPage;
