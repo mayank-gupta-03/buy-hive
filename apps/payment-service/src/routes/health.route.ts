@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { checkHealth } from "../controller/health.controller";
+import { checkHealth } from "../controllers/health.controller";
 
 const healthRoutes = new Hono();
 
