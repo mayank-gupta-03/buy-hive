@@ -6,6 +6,7 @@ import productRoutes from "./routes/product.route";
 import categoryRoutes from "./routes/category.route";
 import { clerkMiddleware } from "@clerk/express";
 import { authMiddleware } from "./middlewares/auth.middleware";
+import { errorHandler } from "./middlewares/errorHandler.middleware";
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use("/api/v1/health", healthRoutes);
 app.use("/api/v1/test", authMiddleware, testRoutes);
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/categories", categoryRoutes);
+
+app.use(errorHandler);
 
 const PORT = Number(process.env.PORT || 4000);
 
