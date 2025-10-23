@@ -5,9 +5,9 @@ export class ApiResponse {
   data?: any;
 
   constructor(status: number, message: string, data?: any) {
-    this.status = status;
     this.message = message;
     this.success = status >= 200 && status < 300;
+    this.status = status;
     if (data !== null && data !== undefined) this.data = data;
   }
 }
