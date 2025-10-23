@@ -1,9 +1,9 @@
 import { Hono } from "hono";
 import { testAuth } from "../controllers/test.controller";
-import { authMiddleware } from "../middlewares/auth.middleware";
+import { shouldBeUser } from "../middlewares/auth.middleware";
 
 const healthRoutes = new Hono();
 
-healthRoutes.get("/", authMiddleware, testAuth);
+healthRoutes.get("/", shouldBeUser, testAuth);
 
 export default healthRoutes;

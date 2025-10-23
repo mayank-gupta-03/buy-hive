@@ -6,13 +6,14 @@ import {
   getCategoryById,
   updateCategoryById,
 } from "../controllers/category.controller";
+import { shouldBeAdmin, shouldBeUser } from "../middlewares/auth.middleware";
 
 const router = Router();
 
-router.get("/", getCategories);
-router.get("/:id", getCategoryById);
-router.post("/", createCategory);
-router.put("/:id", updateCategoryById);
-router.delete("/:id", deleteCategoryById);
+router.get("/", shouldBeUser, getCategories);
+router.get("/:id", shouldBeUser, getCategoryById);
+router.post("/", shouldBeAdmin, createCategory);
+router.put("/:id", shouldBeAdmin, updateCategoryById);
+router.delete("/:id", shouldBeAdmin, deleteCategoryById);
 
 export default router as Router;
