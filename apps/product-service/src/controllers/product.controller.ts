@@ -3,21 +3,47 @@ import { prisma, Prisma } from "@repo/product-db";
 import { asyncHandler } from "../utils/asyncHandler";
 import { ApiResponse } from "../utils/ApiResponse";
 import { ApiError } from "../utils/ApiError";
+import { SearchParams } from "../types/searchParams.type";
 
-export const getProducts = asyncHandler(async (req: Request, res: Response) => {
-  const products = await prisma.product.findMany();
-  const response = new ApiResponse(
-    200,
-    "Products retrieved successfully",
-    products
-  );
+export const getProducts = asyncHandler(
+  async (req: Request<{}, {}, {}, SearchParams>, res: Response) => {
+    const { category, limit, search, sort } = req.query;
 
-  return res.status(response.status).json(response);
-});
+    const orderBy = () => {
+      switch (sort) {
+        case "asc":
+          return { price: Prisma.SortOrder.asc };
+        case "desc":
+          return { price: Prisma.SortOrder.desc };
+        case "oldest":
+          return { createdAt: Prisma.SortOrder.asc };
+        default:
+          return { createdAt: Prisma.SortOrder.desc };
+      }
+    };
+
+    const products = await prisma.product.findMany({
+      where: {
+        ...(category && { categorySlug: category }),
+        ...(search && { name: { contains: search, mode: "insensitive" } }),
+      },
+      orderBy: orderBy(),
+      take: limit ? Number(limit) : undefined,
+    });
+    const response = new ApiResponse(
+      200,
+      "Products retrieved successfully",
+      products
+    );
+
+    return res.status(response.status).json(response);
+  }
+);
 
 export const getProductById = asyncHandler(
   async (req: Request<{ id: string }>, res: Response) => {
     const { id } = req.params;
+
     const product = await prisma.product.findUnique({
       where: { id },
     });
@@ -39,8 +65,32 @@ export const getProductById = asyncHandler(
 export const createProduct = asyncHandler(
   async (req: Request<{}, {}, Prisma.ProductCreateInput>, res: Response) => {
     const data = req.body;
-    const product = await prisma.product.create({ data });
+    const { images, colors } = data;
 
+    if (!colors || !Array.isArray(colors) || colors.length === 0) {
+      const response = new ApiResponse(
+        400,
+        "At least one color must be provided"
+      );
+      return res.status(response.status).json(response);
+    }
+
+    if (!images || typeof images !== "object") {
+      const response = new ApiResponse(400, "Images must be provided");
+      return res.status(response.status).json(response);
+    }
+
+    const missingColors = colors.filter((color) => !(color in images));
+
+    if (missingColors.length > 0) {
+      const response = new ApiResponse(
+        400,
+        `Images for the following colors are missing: ${missingColors.join(", ")}`
+      );
+      return res.status(response.status).json(response);
+    }
+
+    const product = await prisma.product.create({ data });
     const response = new ApiResponse(
       201,
       "Product created successfully",
@@ -62,7 +112,6 @@ export const updateProductById = asyncHandler(
       where: { id },
       data,
     });
-
     const response = new ApiResponse(
       200,
       "Product updated successfully",
