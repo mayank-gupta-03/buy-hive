@@ -8,13 +8,7 @@ import { cors } from "hono/cors";
 
 const app = new Hono().basePath("/api/v1");
 
-app.use(
-  "*",
-  cors({
-    origin: ["http://localhost:3000"],
-    allowHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use("*", cors());
 app.use("*", clerkMiddleware());
 app.route("/health", healthRoutes);
 app.route("/test", testRoutes);

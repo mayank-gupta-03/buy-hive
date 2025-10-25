@@ -11,39 +11,40 @@ interface Props {
 }
 
 const CheckoutForm = ({ shippingForm }: Props) => {
-  const checkout = useCheckout();
+  const checkoutState = useCheckout();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<ConfirmError | null>(null);
 
-  if (checkout.type === "loading") {
-    return <div>Loading...</div>;
-  } else if (checkout.type === "error") {
-    return <div>Error: {checkout.error.message}</div>;
-  }
-
   const handleClick = async () => {
-    setLoading(true);
-    await checkout.checkout.updateEmail(shippingForm.email);
-    await checkout.checkout.updateShippingAddress({
-      name: "shipping_address",
-      address: {
-        line1: shippingForm.address,
-        city: shippingForm.city,
-        country: "US",
-      },
-    });
+    if (checkoutState.type === "success") {
+      setLoading(true);
 
-    const res = await checkout.checkout.confirm();
-    if (res.type === "error") {
-      setError(res.error);
+      const { updateEmail, updateShippingAddress } = checkoutState.checkout;
+
+      await updateEmail(shippingForm.email);
+      await updateShippingAddress({
+        name: "shipping_address",
+        address: {
+          line1: shippingForm.address,
+          city: shippingForm.city,
+          country: "IN",
+        },
+      });
+
+      const res = await checkoutState.checkout.confirm();
+
+      if (res.type === "error") {
+        setError(res.error);
+      }
+
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
     <form>
       <PaymentElement options={{ layout: "accordion" }} />
-      <button disabled={loading} onClick={handleClick}>
+      <button disabled={loading} onClick={handleClick} type="button">
         {loading ? "Loading..." : "Pay"}
       </button>
       {error && <div className="">Error: {error.message}</div>}
