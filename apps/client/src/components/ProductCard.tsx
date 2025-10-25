@@ -105,7 +105,7 @@ const ProductCard = ({ product }: Props) => {
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <p className="font-medium">${product.price}</p>
+          <p className="font-medium">₹{product.price}</p>
           <button
             className="ring-1 ring-gray-200 cursor-pointer rounded-md px-2 py-1 hover:bg-black hover:text-white text-sm transition-all duration-300 flex gap-2 items-center"
             onClick={() => handleAddToCart(product)}

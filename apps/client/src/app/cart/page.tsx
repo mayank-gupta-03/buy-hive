@@ -105,7 +105,7 @@ const CartPage = () => {
                         Color: {item.selectedColor}
                       </p>
                     </div>
-                    <p className="font-medium">${item.price}</p>
+                    <p className="font-medium">₹{item.price}</p>
                   </div>
                 </div>
                 {/* DELETE BUTTON */}
@@ -133,20 +133,20 @@ const CartPage = () => {
           <div className="flex flex-col gap-4">
             <div className="flex justify-between text-sm">
               <p className="text-gray-500">Subtotal</p>
-              <p className="font-medium">${subTotal}</p>
+              <p className="font-medium">₹{subTotal}</p>
             </div>
             <div className="flex justify-between text-sm">
               <p className="text-gray-500">Discount(10%)</p>
-              <p className="font-medium">$10</p>
+              <p className="font-medium">₹10</p>
             </div>
             <div className="flex justify-between text-sm">
               <p className="text-gray-500">Shipping Fee</p>
-              <p className="font-medium">$10</p>
+              <p className="font-medium">₹10</p>
             </div>
             <hr className="border-gray-200" />
             <div className="flex justify-between">
               <p className="text-gray-800 font-semibold">Total</p>
-              <p className="font-medium">${total}</p>
+              <p className="font-medium">₹{total}</p>
             </div>
           </div>
           {activeStep === 1 && (
