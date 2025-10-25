@@ -1,8 +1,7 @@
 "use client";
 
 import { ShippingForm } from "@/types/shippingForm.type";
-import { PaymentElement } from "@stripe/react-stripe-js";
-import { useCheckout } from "@stripe/react-stripe-js/checkout";
+import { PaymentElement, useCheckout } from "@stripe/react-stripe-js/checkout";
 import { ConfirmError } from "@stripe/stripe-js";
 import { useState } from "react";
 
