@@ -1,6 +1,5 @@
 "use client";
 
-import PaymentForm from "@/components/PaymentForm";
 import ShippingForm from "@/components/ShippingForm";
 import { STEPS } from "@/mock/cart.data";
 import { ArrowRight, Trash2 } from "lucide-react";
@@ -10,6 +9,7 @@ import React, { useState } from "react";
 import { ShippingForm as ShippingFormInputs } from "@/types/shippingForm.type";
 import useCartStore from "@/stores/cartStore";
 import { CartItem } from "@repo/types";
+import StripePaymentForm from "@/components/StripePaymentForm";
 
 const CartPage = () => {
   const searchParams = useSearchParams();
@@ -119,7 +119,7 @@ const CartPage = () => {
           ) : activeStep === 2 ? (
             <ShippingForm handleFormChange={handleShippingSubmit} />
           ) : activeStep === 3 && shippingForm ? (
-            <PaymentForm />
+            <StripePaymentForm shippingForm={shippingForm} />
           ) : (
             <p className="text-sm text-gray-500">
               Please fill in the shipping form to continue.
