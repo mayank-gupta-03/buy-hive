@@ -1,4 +1,5 @@
-import { CartList, CartStepList } from "@/types/cart.type";
+import { CartStepList } from "@/types/cart.type";
+import { CartList } from "@repo/types";
 
 export const STEPS: CartStepList = [
   {
@@ -17,7 +18,7 @@ export const STEPS: CartStepList = [
 
 export const CART_ITEMS: CartList = [
   {
-    id: 1,
+    id: "1",
     name: "Adidas CoreFit T-Shirt",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
@@ -34,9 +35,12 @@ export const CART_ITEMS: CartList = [
     quantity: 1,
     selectedSize: "m",
     selectedColor: "gray",
+    categorySlug: "t-shirts",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: 2,
+    id: "2",
     name: "Puma Ultra Warm Zip",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
@@ -49,9 +53,12 @@ export const CART_ITEMS: CartList = [
     quantity: 1,
     selectedSize: "l",
     selectedColor: "gray",
+    categorySlug: "t-shirts",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: 3,
+    id: "3",
     name: "Nike Air Essentials Pullover",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
@@ -68,5 +75,8 @@ export const CART_ITEMS: CartList = [
     quantity: 1,
     selectedSize: "l",
     selectedColor: "black",
+    categorySlug: "t-shirts",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
 ];

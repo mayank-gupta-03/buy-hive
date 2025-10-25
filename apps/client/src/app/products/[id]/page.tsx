@@ -30,7 +30,9 @@ const ProductPage = async ({ params, searchParams }: Props) => {
       {/* IMAGE */}
       <div className="w-full lg:w-5/12 relative aspect-[2/3]">
         <Image
-          src={PRODUCT.images?.[selectedColor] || ""}
+          src={
+            (PRODUCT.images as Record<string, string>)?.[selectedColor] || ""
+          }
           alt={PRODUCT.name}
           fill
           className="object-contain rounded-md"

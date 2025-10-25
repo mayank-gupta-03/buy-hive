@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { ShippingForm as ShippingFormInputs } from "@/types/shippingForm.type";
 import useCartStore from "@/stores/cartStore";
-import { CartItem } from "@/types/cart.type";
+import { CartItem } from "@repo/types";
 
 const CartPage = () => {
   const searchParams = useSearchParams();
@@ -80,7 +80,11 @@ const CartPage = () => {
                   {/* IMAGE */}
                   <div className="relative w-32 h-32 bg-gray-50 rounded-lg overflow-hidden">
                     <Image
-                      src={item.images?.[item.selectedColor] || ""}
+                      src={
+                        (item.images as Record<string, string>)?.[
+                          item.selectedColor
+                        ] || ""
+                      }
                       alt={item.name}
                       fill
                       className="object-contain"

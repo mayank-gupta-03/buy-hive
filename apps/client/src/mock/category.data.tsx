@@ -1,4 +1,3 @@
-import { CategoryList } from "@/types/category.type";
 import {
   ShoppingBasket,
   Shirt,
@@ -9,7 +8,7 @@ import {
   Hand,
 } from "lucide-react";
 
-export const CATEGORIES: CategoryList = [
+export const CATEGORIES = [
   {
     name: "All",
     icon: <ShoppingBasket className="w-4 h-4" />,
