@@ -1,4 +1,4 @@
-import { Product } from "./product.type";
+import { CartList, CartItem } from "@repo/types";
 
 export type CartStep = {
   id: number;
@@ -6,14 +6,6 @@ export type CartStep = {
 };
 
 export type CartStepList = CartStep[];
-
-export type CartItem = Product & {
-  quantity: number;
-  selectedSize: string;
-  selectedColor: string;
-};
-
-export type CartList = CartItem[];
 
 export type CartStore = {
   cart: CartList;

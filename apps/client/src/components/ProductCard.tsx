@@ -1,7 +1,7 @@
 "use client";
 
 import useCartStore from "@/stores/cartStore";
-import { Product } from "@/types/product.type";
+import { Product } from "@repo/types";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,8 +35,8 @@ const ProductCard = ({ product }: Props) => {
   const handleAddToCart = (product: Product) => {
     addToCart({
       ...product,
-      selectedSize: productTypes.size,
-      selectedColor: productTypes.color,
+      selectedSize: productTypes.size!,
+      selectedColor: productTypes.color!,
       quantity: 1,
     });
     toast.success("Product added to cart!");
@@ -48,7 +48,11 @@ const ProductCard = ({ product }: Props) => {
       <Link href={`/products/${product.id}`}>
         <div className="relative aspect-[2/3] hover:scale-105 transition-all duration-300">
           <Image
-            src={product.images?.[productTypes.color] ?? ""}
+            src={
+              (product.images as Record<string, string>)?.[
+                productTypes.color!
+              ] ?? ""
+            }
             alt={product.name}
             fill
             className="object-cover"
@@ -101,7 +105,7 @@ const ProductCard = ({ product }: Props) => {
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <p className="font-medium">${product.price}</p>
+          <p className="font-medium">₹{product.price}</p>
           <button
             className="ring-1 ring-gray-200 cursor-pointer rounded-md px-2 py-1 hover:bg-black hover:text-white text-sm transition-all duration-300 flex gap-2 items-center"
             onClick={() => handleAddToCart(product)}

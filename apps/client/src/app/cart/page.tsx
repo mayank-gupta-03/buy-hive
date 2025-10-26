@@ -1,6 +1,5 @@
 "use client";
 
-import PaymentForm from "@/components/PaymentForm";
 import ShippingForm from "@/components/ShippingForm";
 import { STEPS } from "@/mock/cart.data";
 import { ArrowRight, Trash2 } from "lucide-react";
@@ -9,7 +8,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { ShippingForm as ShippingFormInputs } from "@/types/shippingForm.type";
 import useCartStore from "@/stores/cartStore";
-import { CartItem } from "@/types/cart.type";
+import { CartItem } from "@repo/types";
+import StripePaymentForm from "@/components/StripePaymentForm";
 
 const CartPage = () => {
   const searchParams = useSearchParams();
@@ -80,7 +80,11 @@ const CartPage = () => {
                   {/* IMAGE */}
                   <div className="relative w-32 h-32 bg-gray-50 rounded-lg overflow-hidden">
                     <Image
-                      src={item.images?.[item.selectedColor] || ""}
+                      src={
+                        (item.images as Record<string, string>)?.[
+                          item.selectedColor
+                        ] || ""
+                      }
                       alt={item.name}
                       fill
                       className="object-contain"
@@ -100,7 +104,7 @@ const CartPage = () => {
                         Color: {item.selectedColor}
                       </p>
                     </div>
-                    <p className="font-medium">${item.price}</p>
+                    <p className="font-medium">₹{item.price}</p>
                   </div>
                 </div>
                 {/* DELETE BUTTON */}
@@ -115,7 +119,7 @@ const CartPage = () => {
           ) : activeStep === 2 ? (
             <ShippingForm handleFormChange={handleShippingSubmit} />
           ) : activeStep === 3 && shippingForm ? (
-            <PaymentForm />
+            <StripePaymentForm shippingForm={shippingForm} />
           ) : (
             <p className="text-sm text-gray-500">
               Please fill in the shipping form to continue.
@@ -128,20 +132,20 @@ const CartPage = () => {
           <div className="flex flex-col gap-4">
             <div className="flex justify-between text-sm">
               <p className="text-gray-500">Subtotal</p>
-              <p className="font-medium">${subTotal}</p>
+              <p className="font-medium">₹{subTotal}</p>
             </div>
             <div className="flex justify-between text-sm">
               <p className="text-gray-500">Discount(10%)</p>
-              <p className="font-medium">$10</p>
+              <p className="font-medium">₹10</p>
             </div>
             <div className="flex justify-between text-sm">
               <p className="text-gray-500">Shipping Fee</p>
-              <p className="font-medium">$10</p>
+              <p className="font-medium">₹10</p>
             </div>
             <hr className="border-gray-200" />
             <div className="flex justify-between">
               <p className="text-gray-800 font-semibold">Total</p>
-              <p className="font-medium">${total}</p>
+              <p className="font-medium">₹{total}</p>
             </div>
           </div>
           {activeStep === 1 && (

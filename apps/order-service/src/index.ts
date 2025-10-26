@@ -22,8 +22,8 @@ const start = async () => {
   try {
     await connectToOrderDB();
     await fastify.listen({ port: PORT });
-    console.log("connected to order-db");
-    console.log("order-service is listening on PORT: ", PORT);
+    console.info("connected to order-db");
+    console.info("order-service is listening on PORT: ", PORT);
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
