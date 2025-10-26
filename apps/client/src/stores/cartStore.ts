@@ -20,6 +20,8 @@ const useCartStore = create<CartStore & CartStoreActions>()(
             updatedCart[existingIndex]!.quantity += product.quantity || 1;
             return { cart: updatedCart };
           }
+
+          console.log(product.id);
           return {
             cart: [
               ...state.cart,

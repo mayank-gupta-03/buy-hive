@@ -10,7 +10,6 @@ import { ShippingForm as ShippingFormInputs } from "@/types/shippingForm.type";
 import useCartStore from "@/stores/cartStore";
 import { CartItem } from "@repo/types";
 import StripePaymentForm from "@/components/StripePaymentForm";
-import { Elements } from "@stripe/react-stripe-js";
 
 const CartPage = () => {
   const searchParams = useSearchParams();

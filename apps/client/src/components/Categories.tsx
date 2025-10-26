@@ -14,7 +14,6 @@ const Categories = () => {
   const handleCategoryChange = (value: string | null) => {
     const params = new URLSearchParams(searchParams);
     params.set("category", value || "all");
-    console.log(params.toString());
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 

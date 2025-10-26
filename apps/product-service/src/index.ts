@@ -28,5 +28,5 @@ app.use(errorHandler);
 const PORT = Number(process.env.PORT || 4000);
 
 app.listen(PORT, () => {
-  console.log("product-service is listening on PORT: ", PORT);
+  console.info("product-service is listening on PORT: ", PORT);
 });

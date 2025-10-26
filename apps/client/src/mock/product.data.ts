@@ -2,7 +2,7 @@ import { Product, ProductList } from "@repo/types";
 
 export const PRODUCTS: ProductList = [
   {
-    id: "1",
+    id: "prod_QqtV2TePA6M8Uy",
     name: "Adidas CoreFit T-Shirt",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
@@ -136,7 +136,7 @@ export const PRODUCTS: ProductList = [
 ];
 
 export const PRODUCT: Product = {
-  id: "1",
+  id: "prod_QqtV2TePA6M8Uy",
   name: "Adidas CoreFit T-Shirt",
   shortDescription:
     "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",

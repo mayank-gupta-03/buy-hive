@@ -8,7 +8,7 @@ interface Props {
 
 const HomePage = async ({ searchParams }: Props) => {
   const category = (await searchParams).category;
-  console.log(await searchParams);
+
   return (
     <div>
       <div className="relative aspect-[3/1] mb-16">

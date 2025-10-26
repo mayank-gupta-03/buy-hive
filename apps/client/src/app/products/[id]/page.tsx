@@ -22,8 +22,6 @@ const ProductPage = async ({ params, searchParams }: Props) => {
   const { color, size } = await searchParams;
   const selectedSize = size ?? PRODUCT.sizes[0];
   const selectedColor = color ?? PRODUCT.colors[0];
-  const productId = await params;
-  console.log(productId);
 
   return (
     <div className="flex flex-col gap-4 lg:flex-row md:gap-12 mt-12">

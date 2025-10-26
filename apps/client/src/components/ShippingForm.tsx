@@ -41,7 +41,7 @@ const ShippingForm = ({ handleFormChange }: Props) => {
           id="name"
           placeholder="John Doe"
           {...register("name")}
-          // value={"John Doe"} //TODO: Remove hardcoded values after project completion
+          value={"John Doe"} //TODO: Remove hardcoded values after project completion
         />
         {errors.name && (
           <p className="text-xs text-red-500">{errors.name.message}</p>
@@ -57,7 +57,7 @@ const ShippingForm = ({ handleFormChange }: Props) => {
           id="email"
           placeholder="johndoe@gmail.com"
           {...register("email")}
-          // value={"johndoe@gmail.com"} // TODO: Remove the hardcoded value after project completion
+          value={"johndoe@gmail.com"} // TODO: Remove the hardcoded value after project completion
         />
         {errors.email && (
           <p className="text-xs text-red-500">{errors.email.message}</p>
@@ -73,7 +73,7 @@ const ShippingForm = ({ handleFormChange }: Props) => {
           id="phone"
           placeholder="1234567890"
           {...register("phone")}
-          // value={1234567890} // TODO: Remove the hardcoded value after project completion
+          value={1234567890} // TODO: Remove the hardcoded value after project completion
         />
         {errors.phone && (
           <p className="text-xs text-red-500">{errors.phone.message}</p>
@@ -89,7 +89,7 @@ const ShippingForm = ({ handleFormChange }: Props) => {
           id="address"
           placeholder="123 Main St."
           {...register("address")}
-          // value={"123 Main St, Anytown"} // TODO: Remove the hardcoded value after project completion
+          value={"123 Main St, Anytown"} // TODO: Remove the hardcoded value after project completion
         />
         {errors.address && (
           <p className="text-xs text-red-500">{errors.address.message}</p>
@@ -105,7 +105,7 @@ const ShippingForm = ({ handleFormChange }: Props) => {
           id="city"
           placeholder="New York"
           {...register("city")}
-          // value={"New York"} // TODO: Remove the hardcoded value after project completion
+          value={"New York"} // TODO: Remove the hardcoded value after project completion
         />
         {errors.city && (
           <p className="text-xs text-red-500">{errors.city.message}</p>
