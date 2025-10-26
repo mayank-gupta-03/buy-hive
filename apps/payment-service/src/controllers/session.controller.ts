@@ -25,20 +25,21 @@ export const createCheckoutSession: Handler = async (c) => {
 
   try {
     const session = await stripe.checkout.sessions.create({
-      line_items: lineItems,
-      // TODO: Remove hardcoded data after project completion
-      // [
-      //   {
-      //     price_data: {
-      //       currency: "inr",
-      //       product_data: {
-      //         name: "test product 1",
-      //       },
-      //       unit_amount: 60000,
-      //     },
-      //     quantity: 1,
-      //   },
-      // ],
+      line_items:
+        // lineItems,
+        // TODO: Remove hardcoded data after project completion
+        [
+          {
+            price_data: {
+              currency: "inr",
+              product_data: {
+                name: "test product 1",
+              },
+              unit_amount: 60000,
+            },
+            quantity: 1,
+          },
+        ],
       client_reference_id: userId,
       mode: "payment",
       ui_mode: "custom",

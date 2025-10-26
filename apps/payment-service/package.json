@@ -10,7 +10,7 @@
     "@hono/clerk-auth": "^3.0.3",
     "@hono/node-server": "^1.19.5",
     "hono": "^4.9.9",
-    "stripe": "18.0.0"
+    "stripe": "19.1.0"
   },
   "devDependencies": {
     "@repo/types": "workspace:*",
